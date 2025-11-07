@@ -27,11 +27,24 @@
       margin:0;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
-      background:radial-gradient(1200px 600px at 70% -10%, #122037 10%, transparent 60%),
-                 radial-gradient(1000px 500px at -10% 0%, #182538 10%, transparent 60%),
-                 var(--bg);
+      background:
+        radial-gradient(1200px 600px at 70% -10%, #122037 10%, transparent 60%) no-repeat,
+        radial-gradient(1000px 500px at -10% 0%, #182538 10%, transparent 60%) no-repeat,
+        var(--bg);
       line-height:1.6;
+      position:relative;
+      overflow-x:hidden;
     }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 120px, rgba(11,15,20,.85) 220px, #0b0f14 360px, #0b0f14 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
     /* ====== Header / Nav ====== */
     header{
       position:sticky; top:0; z-index:50;
@@ -121,7 +134,7 @@
       <div class="grid">
         <div class="card">
           <h1 class="h1" id="hero-title">Welcome, traveler.</h1>
-          <p class="lead">Company of the Silver Swan — a haven for lore‑minded adventurers. Find <strong>Quest Guides</strong> and <strong>Builds</strong> tuned for swift journeys and elegant play.</p>
+          <p class="lead">Company of the Silver Swan — a haven for lore-minded adventurers. Find <strong>Quest Guides</strong> and <strong>Builds</strong> tuned for swift journeys and elegant play.</p>
           <p style="margin-top:14px"><a class="btn" href="#guides">Browse Quest Guides</a></p>
         </div>
         <div class="card">
@@ -139,7 +152,7 @@
     <section id="about" aria-labelledby="about-title">
       <div class="card">
         <h2 id="about-title">About</h2>
-        <p class="muted">We are wanderers, knights, scholars, and friends — drawn together not by command, but by choice. In every deed and every word, we strive to reflect the grace of the Swan and the steadfast heart of the West.</p>
+        <p class="muted">The Company of the Silver Swan is a community project focused on clear, readable guides and practical builds. This one-page site is intentionally simple so it’s easy to maintain. Replace this text with your own mission, Discord link, and contact info.</p>
       </div>
     </section>
 
@@ -152,7 +165,7 @@
           <details>
             <summary><span class="chev" aria-hidden>▶</span> Quest Guide — <strong>Bingo Boffin</strong></summary>
             <div style="margin-top:10px" role="region" aria-label="Bingo Boffin guide">
-              <p class="muted">A charming episodic questline beginning in the Shire. Use this space for steps, maps, and tips. You can paste images or link to LOTRO‑Wiki pages.</p>
+              <p class="muted">A charming episodic questline beginning in the Shire. Use this space for steps, maps, and tips. You can paste images or link to LOTRO-Wiki pages.</p>
               <ul class="muted">
                 <li>Start: <em>Bingo Boffin</em> in Michel Delving (Town Hole).</li>
                 <li>Cadence: Weekly chapters; check mail for new leads.</li>
@@ -175,7 +188,7 @@
     <section id="builds" aria-labelledby="builds-title">
       <div class="card">
         <h2 id="builds-title">Builds</h2>
-        <p class="muted">Keep builds concise. Link to longer write‑ups if needed.</p>
+        <p class="muted">Keep builds concise. Link to longer write-ups if needed.</p>
         <div class="accordion">
           <details>
             <summary><span class="chev" aria-hidden>▶</span> Burglar — <strong>Starter Solo</strong></summary>
@@ -188,7 +201,7 @@
             </div>
           </details>
           <details>
-            <summary><span class="chev" aria-hidden>▶</span> Captain — <strong>Red‑line DPS</strong></summary>
+            <summary><span class="chev" aria-hidden>▶</span> Captain — <strong>Red-line DPS</strong></summary>
             <div style="margin-top:10px">
               <p class="muted">Placeholder build notes.</p>
             </div>
