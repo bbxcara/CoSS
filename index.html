@@ -10,15 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0f14;         /* deep night */
-      --panel:#121822;      /* slightly lighter */
-      --text:#e7edf6;       /* light text */
-      --muted:#9fb1c7;      /* secondary */
-      --brand:#c9d6ff;      /* accent */
-      --brand2:#84a6ff;     /* accent 2 */
-      --ring:#6aa0ff55;     /* focus ring */
-      --card:#0f141c;       /* cards */
-      --border:#233044;     /* subtle border */
+      --bg:#0b0f14;
+      --panel:#121822;
+      --text:#e7edf6;
+      --muted:#9fb1c7;
+      --brand:#c9d6ff;
+      --brand2:#84a6ff;
+      --ring:#6aa0ff55;
+      --card:#0f141c;
+      --border:#233044;
       --link:#9cc2ff;
     }
     *{box-sizing:border-box}
@@ -45,7 +45,6 @@
       pointer-events: none;
     }
 
-    /* ====== Header / Nav ====== */
     header{
       position:sticky; top:0; z-index:50;
       background:linear-gradient(180deg, #0b0f14 0%, #0b0f14ee 70%, #0b0f1400 100%);
@@ -62,7 +61,7 @@
       box-shadow:0 0 0 2px #ffffff22, 0 8px 20px #0008;
       position:relative; overflow:hidden;
     }
-    .logo:before{ /* simple swan silhouette */
+    .logo:before{
       content:""; position:absolute; inset:0; background:radial-gradient(150% 120% at 70% 30%, #0000 0 42%, #0b0f14 43% 46%, #0000 47%),
                                            radial-gradient(70% 60% at 35% 65%, #0b0f14 0 36%, #0000 37%),
                                            radial-gradient(75% 65% at 65% 65%, #0b0f14 0 40%, #0000 41%);
@@ -75,20 +74,17 @@
     }
     .navlinks a:hover{background:#ffffff0f; border-color:#ffffff20}
 
-    /* ====== Layout ====== */
     main{max-width:1100px; margin:0 auto; padding:24px 16px 80px}
     section{padding:48px 0}
     .h1{font-family:Cinzel, serif; font-weight:700; font-size:clamp(28px, 3.4vw, 46px); line-height:1.2; margin:8px 0 6px}
     .lead{color:var(--muted); font-size:clamp(14px, 1.8vw, 18px)}
 
-    /* ====== Cards / Panels ====== */
     .grid{display:grid; gap:16px}
     @media (min-width: 860px){ .grid{grid-template-columns: 1.3fr 1fr} }
     .card{background:linear-gradient(180deg, #121822, #0f141c); border:1px solid var(--border); border-radius:16px; padding:18px 18px}
     .card h2{font-family:Cinzel, serif; margin:0 0 6px; font-size:clamp(20px,2.2vw,28px)}
     .muted{color:var(--muted)}
 
-    /* ====== Accordion (Quest Guides, Builds) ====== */
     .accordion{display:grid; gap:10px; margin-top:10px}
     details{
       background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; transition:transform .2s ease;
@@ -96,20 +92,29 @@
     details[open]{outline:2px solid var(--ring)}
     summary{cursor:pointer; list-style:none; display:flex; align-items:center; gap:10px; font-weight:600}
     summary::-webkit-details-marker{display:none}
-    .chev{transition:transform .2s ease}
-    details[open] .chev{transform:rotate(90deg)}
 
-    /* ====== Buttons & Links ====== */
+    .chev {
+      display:inline-block;
+      font-family: 'Segoe UI Symbol', 'Noto Sans Symbols', 'Apple Symbols', sans-serif;
+      font-size: 1.4em;
+      transition: transform .2s ease;
+    }
+    .chev::before {
+      content: '▸';
+      display: inline-block;
+    }
+    details[open] .chev {
+      transform: rotate(90deg);
+    }
+
     .btn{
       display:inline-block; background:linear-gradient(180deg, var(--brand), var(--brand2)); color:#0a0f16; font-weight:700;
       padding:10px 14px; border-radius:12px; text-decoration:none; box-shadow:0 6px 18px #84a6ff33; border:1px solid #fff6;
     }
     .btn:hover{filter:brightness(1.05)}
 
-    /* ====== Footer ====== */
     footer{border-top:1px solid var(--border); padding:28px 16px; text-align:center; color:var(--muted)}
 
-    /* Smooth scrolling */
     html{scroll-behavior:smooth}
   </style>
 </head>
@@ -129,7 +134,6 @@
   </header>
 
   <main id="top">
-    <!-- Hero / Intro -->
     <section aria-labelledby="hero-title">
       <div class="grid">
         <div class="card">
@@ -148,7 +152,6 @@
       </div>
     </section>
 
-    <!-- About -->
     <section id="about" aria-labelledby="about-title">
       <div class="card">
         <h2 id="about-title">About</h2>
@@ -156,14 +159,13 @@
       </div>
     </section>
 
-    <!-- Quest Guides -->
     <section id="guides" aria-labelledby="guides-title">
       <div class="card">
         <h2 id="guides-title">Quest Guides</h2>
         <p class="muted">Drop in guides as collapsible sections. Add as many as you like.</p>
         <div class="accordion" role="list">
           <details>
-            <summary><span class="chev" aria-hidden>▶</span> Quest Guide — <strong>Bingo Boffin</strong></summary>
+            <summary><span class="chev" aria-hidden="true"></span> Quest Guide — <strong>Bingo Boffin</strong></summary>
             <div style="margin-top:10px" role="region" aria-label="Bingo Boffin guide">
               <p class="muted">A charming episodic questline beginning in the Shire. Use this space for steps, maps, and tips. You can paste images or link to LOTRO-Wiki pages.</p>
               <ul class="muted">
@@ -175,7 +177,7 @@
           </details>
 
           <details>
-            <summary><span class="chev" aria-hidden>▶</span> Quest Guide — <strong>Epic Book (Intro)</strong></summary>
+            <summary><span class="chev" aria-hidden="true"></span> Quest Guide — <strong>Epic Book (Intro)</strong></summary>
             <div style="margin-top:10px">
               <p class="muted">Placeholder text for your Epic Book notes. Outline prerequisites and optimal routing.</p>
             </div>
@@ -184,14 +186,13 @@
       </div>
     </section>
 
-    <!-- Builds -->
     <section id="builds" aria-labelledby="builds-title">
       <div class="card">
         <h2 id="builds-title">Builds</h2>
         <p class="muted">Keep builds concise. Link to longer write-ups if needed.</p>
         <div class="accordion">
           <details>
-            <summary><span class="chev" aria-hidden>▶</span> Burglar — <strong>Starter Solo</strong></summary>
+            <summary><span class="chev" aria-hidden="true"></span> Burglar — <strong>Starter Solo</strong></summary>
             <div style="margin-top:10px">
               <ul class="muted">
                 <li><strong>Trait Focus:</strong> Crit chain uptime, positional bonuses, survivability.
@@ -201,7 +202,7 @@
             </div>
           </details>
           <details>
-            <summary><span class="chev" aria-hidden>▶</span> Captain — <strong>Red-line DPS</strong></summary>
+            <summary><span class="chev" aria-hidden="true"></span> Captain — <strong>Red-line DPS</strong></summary>
             <div style="margin-top:10px">
               <p class="muted">Placeholder build notes.</p>
             </div>
@@ -216,10 +217,7 @@
   </footer>
 
   <script>
-    // Set current year
     document.getElementById('yr').textContent = new Date().getFullYear();
-
-    // Make summary rows keyboard focus visible
     document.querySelectorAll('summary').forEach(s => {
       s.addEventListener('focus', () => s.parentElement.style.outline = '2px solid var(--ring)');
       s.addEventListener('blur',  () => s.parentElement.style.outline = '');
