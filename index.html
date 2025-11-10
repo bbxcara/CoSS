@@ -3,227 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Company of the Silver Swan</title>
-  <meta name="description" content="Company of the Silver Swan — About, Quest Guides, and Builds" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Company of the Silver Swan — Launching soon</title>
+  <meta name="description" content="Company of the Silver Swan — Launching soon. We are currently making some improvements to our website." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0f14;
-      --panel:#121822;
-      --text:#e7edf6;
-      --muted:#9fb1c7;
-      --brand:#c9d6ff;
-      --brand2:#84a6ff;
-      --ring:#6aa0ff55;
-      --card:#0f141c;
-      --border:#233044;
-      --link:#9cc2ff;
-    }
+    :root{--bg:#000;--text:#e7e7e7;--muted:#b6b6b6}
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 70% -10%, #122037 10%, transparent 60%) no-repeat,
-        radial-gradient(1000px 500px at -10% 0%, #182538 10%, transparent 60%) no-repeat,
-        var(--bg);
-      line-height:1.6;
-      position:relative;
-      overflow-x:hidden;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 120px, rgba(11,15,20,.85) 220px, #0b0f14 360px, #0b0f14 100%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    header{
-      position:sticky; top:0; z-index:50;
-      background:linear-gradient(180deg, #0b0f14 0%, #0b0f14ee 70%, #0b0f1400 100%);
-      backdrop-filter:saturate(1.2) blur(6px);
-      border-bottom:1px solid var(--border);
-    }
-    .nav{
-      max-width:1100px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:16px;
-    }
-    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
-    .logo{
-      width:36px; height:36px; border-radius:50%;
-      background:conic-gradient(from 210deg, #ffffff 0 20%, #dfe9ff 20% 40%, #a7c4ff 40% 60%, #dfe9ff 60% 80%, #ffffff 80%);
-      box-shadow:0 0 0 2px #ffffff22, 0 8px 20px #0008;
-      position:relative; overflow:hidden;
-    }
-    .logo:before{
-      content:""; position:absolute; inset:0; background:radial-gradient(150% 120% at 70% 30%, #0000 0 42%, #0b0f14 43% 46%, #0000 47%),
-                                           radial-gradient(70% 60% at 35% 65%, #0b0f14 0 36%, #0000 37%),
-                                           radial-gradient(75% 65% at 65% 65%, #0b0f14 0 40%, #0000 41%);
-      mix-blend-mode:multiply; opacity:.7;
-    }
-    .title{font-family:Cinzel, serif; font-weight:700; letter-spacing:.4px}
-    .navlinks{margin-left:auto; display:flex; gap:10px; flex-wrap:wrap}
-    .navlinks a{
-      text-decoration:none; color:var(--text); padding:8px 12px; border-radius:12px; border:1px solid transparent;
-    }
-    .navlinks a:hover{background:#ffffff0f; border-color:#ffffff20}
-
-    main{max-width:1100px; margin:0 auto; padding:24px 16px 80px}
-    section{padding:48px 0}
-    .h1{font-family:Cinzel, serif; font-weight:700; font-size:clamp(28px, 3.4vw, 46px); line-height:1.2; margin:8px 0 6px}
-    .lead{color:var(--muted); font-size:clamp(14px, 1.8vw, 18px)}
-
-    .grid{display:grid; gap:16px}
-    @media (min-width: 860px){ .grid{grid-template-columns: 1.3fr 1fr} }
-    .card{background:linear-gradient(180deg, #121822, #0f141c); border:1px solid var(--border); border-radius:16px; padding:18px 18px}
-    .card h2{font-family:Cinzel, serif; margin:0 0 6px; font-size:clamp(20px,2.2vw,28px)}
-    .muted{color:var(--muted)}
-
-    .accordion{display:grid; gap:10px; margin-top:10px}
-    details{
-      background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; transition:transform .2s ease;
-    }
-    details[open]{outline:2px solid var(--ring)}
-    summary{cursor:pointer; list-style:none; display:flex; align-items:center; gap:10px; font-weight:600}
-    summary::-webkit-details-marker{display:none}
-
-    .chev {
-      display:inline-block;
-      font-family: 'Segoe UI Symbol', 'Noto Sans Symbols', 'Apple Symbols', sans-serif;
-      font-size: 1.4em;
-      transition: transform .2s ease;
-    }
-    .chev::before {
-      content: '▸';
-      display: inline-block;
-    }
-    details[open] .chev {
-      transform: rotate(90deg);
-    }
-
-    .btn{
-      display:inline-block; background:linear-gradient(180deg, var(--brand), var(--brand2)); color:#0a0f16; font-weight:700;
-      padding:10px 14px; border-radius:12px; text-decoration:none; box-shadow:0 6px 18px #84a6ff33; border:1px solid #fff6;
-    }
-    .btn:hover{filter:brightness(1.05)}
-
-    footer{border-top:1px solid var(--border); padding:28px 16px; text-align:center; color:var(--muted)}
-
-    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    .wrap{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:clamp(24px,4vw,96px)}
+    .inner{max-width:1000px;text-align:center;width:100%}
+    .brand{letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--muted);font-size:clamp(12px,1.2vw,18px);margin-bottom:clamp(40px,6vh,96px)}
+    h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:500;color:#bfbfbf;margin:0 0 8px;line-height:.9;letter-spacing:.01em;font-size:clamp(56px,10vw,164px)}
+    h1 .subline{display:block;font-size:clamp(40px,8vw,110px)}
+    p.lead{color:#c8c8c8;font-size:clamp(18px,2.4vw,28px);line-height:1.6;max-width:60ch;margin:24px auto 0}
+    /* subtle motion */
+    .fade{opacity:0;transform:translateY(8px);animation:fadeUp .9s ease both}
+    .fade.d1{animation-delay:.1s}
+    .fade.d2{animation-delay:.25s}
+    .fade.d3{animation-delay:.5s}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce){.fade{animation:none;opacity:1;transform:none}}
   </style>
 </head>
 <body>
-  <header>
-    <nav class="nav">
-      <a class="brand" href="#top" aria-label="Company of the Silver Swan Home">
-        <span class="logo" aria-hidden="true"></span>
-        <span class="title">Company of the Silver Swan</span>
-      </a>
-      <div class="navlinks">
-        <a href="#about">About</a>
-        <a href="#guides">Quest Guides</a>
-        <a href="#builds">Builds</a>
-      </div>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section aria-labelledby="hero-title">
-      <div class="grid">
-        <div class="card">
-          <h1 class="h1" id="hero-title">Welcome, traveler.</h1>
-          <p class="lead">Company of the Silver Swan — a haven for lore-minded adventurers. Find <strong>Quest Guides</strong> and <strong>Builds</strong> tuned for swift journeys and elegant play.</p>
-          <p style="margin-top:14px"><a class="btn" href="#guides">Browse Quest Guides</a></p>
-        </div>
-        <div class="card">
-          <h2>Quick Links</h2>
-          <ul class="muted" style="margin:8px 0 0; padding-left:18px">
-            <li><a class="muted" href="#about">What is the Silver Swan?</a></li>
-            <li><a class="muted" href="#guides">Featured: Bingo Boffin Questline</a></li>
-            <li><a class="muted" href="#builds">Starter Burglar Build</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-<!--ABOUT SECTION -->
-    <section id="about" aria-labelledby="about-title">
-      <div class="card">
-        <h2 id="about-title">About</h2>
-        <p class="muted">We are wanderers, knights, scholars, and friends — drawn together not by command, but by choice. In every deed and every word, we strive to reflect the grace of the Swan and the steadfast heart of the West.</p>
-      </div>
-    </section>
-<!--QUEST-->
-    <section id="guides" aria-labelledby="guides-title">
-      <div class="card">
-        <h2 id="guides-title">Quest Guides</h2>
-        <p class="muted">Drop in guides as collapsible sections. Add as many as you like.</p>
-        <div class="accordion" role="list">
-          <details>
-            <summary><span class="chev" aria-hidden="true"></span> Quest Guide — <strong>Bingo Boffin</strong></summary>
-            <div style="margin-top:10px" role="region" aria-label="Bingo Boffin guide">
-              <p class="muted">A charming episodic questline beginning in the Shire. Use this space for steps, maps, and tips. You can paste images or link to LOTRO-Wiki pages.</p>
-              <ul class="muted">
-                <li>Start: <em>Bingo Boffin</em> in Michel Delving (Town Hole).</li>
-                <li>Cadence: Weekly chapters; check mail for new leads.</li>
-                <li>Rewards: Cosmetics, titles, and story trinkets.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="chev" aria-hidden="true"></span> Quest Guide — <strong>Epic Book (Intro)</strong></summary>
-            <div style="margin-top:10px">
-              <p class="muted">Placeholder text for your Epic Book notes. Outline prerequisites and optimal routing.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-<!--BUILDS-->
-    <section id="builds" aria-labelledby="builds-title">
-      <div class="card">
-        <h2 id="builds-title">Builds</h2>
-        <p class="muted">Keep builds concise. Link to longer write-ups if needed.</p>
-        <div class="accordion">
-          <details>
-<!--BURGLAR-->
-            <summary><span class="chev" aria-hidden="true"></span> Burglar — <strong>RedLine(DPS)</strong></summary>
-            <div style="margin-top:10px">
-              <ul class="muted">
-                <li><strong>Trait Focus:</strong> Crit chain uptime, positional bonuses, survivability.
-                <li><strong>Rotation:</strong> Open from stealth; maintain DoTs; spend on finishers.
-                <li><strong>Virtues:</strong> Swap based on content (e.g., <em>Determination</em>, <em>Zeal</em>).</li>
-              </ul>
-            </div>
-          </details>
-          <details>
-<!--CAPTAIN-->
-            <summary><span class="chev" aria-hidden="true"></span> Captain — <strong>RedLine(DPS)</strong></summary>
-            <div style="margin-top:10px">
-              <p class="muted">Placeholder build notes.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <small>© <span id="yr"></span> Linala • <a class="muted" href="#top">Back to top</a></small>
-  </footer>
-
-  <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
-    document.querySelectorAll('summary').forEach(s => {
-      s.addEventListener('focus', () => s.parentElement.style.outline = '2px solid var(--ring)');
-      s.addEventListener('blur',  () => s.parentElement.style.outline = '');
-    });
-  </script>
+  <div class="wrap">
+    <main class="inner">
+      <div class="brand fade d1">Company of the Silver Swan</div>
+      <h1 class="fade d2">Launching <span class="subline">soon!</span></h1>
+      <p class="lead fade d3">We are currently making some improvements to our website!</p>
+    </main>
+  </div>
 </body>
 </html>
