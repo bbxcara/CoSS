@@ -5,49 +5,137 @@
   <title>Bingo Boffin QuestLine</title>
   <style>
     body {
-      background:#000; color:#eaeaea; font-family:Arial, sans-serif;
-      margin:0; padding:20px;
+      background: #000;
+      color: #eaeaea;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
     }
+
     details {
-      max-width:900px; margin:24px auto; background:#1f1f1f;
-      border:1px solid #444; border-radius:14px; padding:18px 20px;
-      box-shadow:0 2px 12px rgba(0,0,0,.35); line-height:1.6; overflow:hidden;
+      max-width: 900px;
+      margin: 24px auto;
+      background: #1f1f1f;
+      border: 1px solid #444;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      line-height: 1.6;
+      overflow: hidden;
     }
-    summary { list-style:none; cursor:pointer; font-weight:700; font-size:1.25rem; color:#f2c44c; outline:none; }
-    h3 { margin:8px 0 8px; font-size:1.1rem; color:#ffd86b; }
 
-    /* Fade groups: each section fades as a unit */
-    @keyframes fadeIn { to { opacity:1; transform:translateY(0); } }
-    .fade-group { opacity:0; transform:translateY(10px); }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #f2c44c;
+      outline: none;
+      display: flex;
+      align-items: center;
+    }
+
+    /* ▶ Arrow base (points right initially) */
+    summary .arrow {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-right: 8px;
+      vertical-align: middle;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid #f2c44c;
+      transition: transform 0.25s ease;
+      transform-origin: center;
+    }
+
+    /* ▼ Rotated arrow when expanded */
+    details[open] summary .arrow {
+      transform: rotate(90deg);
+    }
+
+    /* Subtle glow when open */
+    details[open] summary {
+      color: #ffd86b;
+      text-shadow: 0 0 6px rgba(242, 196, 76, 0.4);
+    }
+
+    /* --- Smooth fade animation system --- */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-group {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
     details[open] .fade-group {
-      animation: fadeIn .6s ease forwards;
-      /* order with --g: 1,2,3…  (220ms between groups) */
-      animation-delay: calc(var(--g,1) * 220ms);
+      animation: fadeIn 0.6s ease forwards;
+      animation-delay: calc(var(--g, 1) * 220ms);
     }
 
-    /* List + coords */
-    li { margin:10px 0; list-style:none; display:flex; gap:10px; align-items:flex-start; }
-    input[type="checkbox"] { margin-top:3px; accent-color:#f2c44c; }
-    .coord { display:inline-block; margin-left:6px; padding:2px 8px; border:1px solid #555; border-radius:9999px; background:#2a2a2a; font-size:.85em; }
+    li {
+      margin: 10px 0;
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: #f2c44c;
+    }
+
+    .coord {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border: 1px solid #555;
+      border-radius: 9999px;
+      background: #2a2a2a;
+      font-size: 0.85em;
+    }
+
+    h3 {
+      margin: 8px 0 8px;
+      font-size: 1.1rem;
+      color: #ffd86b;
+    }
 
     /* Riddle block */
     blockquote {
-      margin:10px 20px; padding:10px 15px; border-left:3px solid #f2c44c;
-      background:#222; font-style:italic; border-radius:6px; line-height:1.5;
-      white-space:pre-wrap; /* keep your line breaks */
+      margin: 10px 20px;
+      padding: 10px 15px;
+      border-left: 3px solid #f2c44c;
+      background: #222;
+      font-style: italic;
+      border-radius: 6px;
+      line-height: 1.5;
+      white-space: pre-wrap; /* preserves line breaks but ignores leading empty ones */
     }
+
     @media (prefers-reduced-motion: reduce) {
-      .fade-group, details[open] .fade-group { animation:none; opacity:1; transform:none; }
+      .fade-group,
+      details[open] .fade-group {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 <body>
 
   <details>
-    <summary>▾ Bingo Boffin QuestLine</summary>
+    <summary><span class="arrow"></span>Bingo Boffin QuestLine</summary>
     <div style="margin-top:14px;">
 
-      <!-- GROUP 1: Intro -->
+      <!-- Group 1: Intro -->
       <section class="fade-group" style="--g:1">
         <p>
           Go with Mr. Boffin on adventures and he will reward you with titles
@@ -61,7 +149,7 @@
         </p>
       </section>
 
-      <!-- GROUP 2: Riddles -->
+      <!-- Group 2: Riddles -->
       <section class="fade-group" style="--g:2">
         <h3>Bingo's Obtuse Riddles</h3>
         <p><b>📜 Theodore's Riddle:</b></p>
@@ -70,20 +158,10 @@ The torrent flows, blanketed in the shadow of only morning.
 A sentinel stares from on high; only he still watches.
 The red squirrel once dared the climb, but Time fells all.
         </blockquote>
-        <p><b>💡 Hint:</b> Look for the fallen tree at Weathertop; you can cross it without falling.</p>
-
-        <p><b>📜 Cryptic Message:</b></p>
-        <blockquote>
-whaT's good for the goose is good for the gander.
-and what's bad for tHe cad is a tad over yonder.
-goblins and spiders and plotting and fightErs.
-Lest Our Relative Novice Seem Perplexed And Nonplussed,
-too many spell danger, so look to the spell for the answer
-        </blockquote>
-        <p><b>💡 Hint:</b> Go Eglain Camp and look for a bridge near the south downs.</p>
+        <p><b>💡 Hint:</b> Go to the Eglain Camp and look for a bridge near the South Downs.</p>
       </section>
 
-      <!-- GROUP 3: Scattered Thoughts -->
+      <!-- Group 3: Scattered Thoughts -->
       <section class="fade-group" style="--g:3">
         <h3>Bingo's Scattered Thoughts</h3>
         <p>Speak to dwarves for hints in the Twenty-First Hall and Flaming Deeps.</p>
