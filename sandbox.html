@@ -1,75 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Bingo Boffin QuestLine</title>
   <style>
-    body { background:#000; color:#eaeaea; font-family:Arial, sans-serif; margin:0; padding:20px; }
+    body {
+      background: #000;
+      color: #eaeaea;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
 
     details {
-      max-width:900px; margin:24px auto; background:#1f1f1f; border:1px solid #444;
-      border-radius:14px; padding:18px 20px; box-shadow:0 2px 12px rgba(0,0,0,.35); line-height:1.6; overflow:hidden;
+      max-width: 900px;
+      margin: 24px auto;
+      background: #1f1f1f;
+      border: 1px solid #444;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      line-height: 1.6;
+      overflow: hidden;
     }
-    summary { list-style:none; cursor:pointer; font-weight:700; font-size:1.25rem; color:#f2c44c; outline:none; }
 
-    /* Deterministic fade using a per-item index */
-    .fade-item { opacity:0; transform:translateY(10px); }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #f2c44c;
+      outline: none;
+    }
+
+    /* --- Smooth fade animation system --- */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-item {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
     details[open] .fade-item {
-      animation: fadeIn .6s ease forwards;
-      animation-delay: calc(var(--i, 1) * 140ms);
+      animation: fadeIn 0.6s ease forwards;
+      /* each “10 points” adds about 150 ms delay */
+      animation-delay: calc((var(--i, 10) / 10) * 150ms);
     }
-    @keyframes fadeIn { to { opacity:1; transform:translateY(0); } }
 
-    li { margin:10px 0; list-style:none; display:flex; gap:10px; align-items:flex-start; }
-    input[type="checkbox"] { margin-top:3px; accent-color:#f2c44c; }
-    .coord { display:inline-block; margin-left:6px; padding:2px 8px; border:1px solid #555; border-radius:9999px; background:#2a2a2a; font-size:.85em; }
-    h3 { margin:8px 0 8px; font-size:1.1rem; color:#ffd86b; }
+    li {
+      margin: 10px 0;
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: #f2c44c;
+    }
+
+    .coord {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border: 1px solid #555;
+      border-radius: 9999px;
+      background: #2a2a2a;
+      font-size: 0.85em;
+    }
+
+    h3 {
+      margin: 8px 0 8px;
+      font-size: 1.1rem;
+      color: #ffd86b;
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      .fade-item, details[open] .fade-item { animation:none; opacity:1; transform:none; }
+      .fade-item,
+      details[open] .fade-item {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 <body>
-  
+
   <details>
     <summary>▾ Bingo Boffin QuestLine</summary>
-    <p class="fade-item" style="--i:1">
-  Go with Mr. Boffin on adventures and he will reward you with Titles
- <img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Event-title-icon.png"
-     alt="Titles" style="height:32px; vertical-align:middle; border-radius:4px; margin:0 4px;">
-  and items to barter with Bingo Badges. 
-<img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Token_of_Salutation-icon.png"
-     alt="Bingo Badges" style="height:32px; vertical-align:middle; border-radius:4px; margin-left:4px;">
-  The quest line is beginner friendly and will follow along with you as you progress through the epic quest. There are a few quests that are a bit frustrating and obtuse — we will help you with those.
-</p>
-      <h3 class="fade-item" style="--i:2">Bingo's Obtuse Riddles</h3>
-      <p>
-        TEST
+    <div style="margin-top:14px;">
+
+      <!-- Intro section -->
+      <p class="fade-item" style="--i:10">
+        Go with Mr. Boffin on adventures and he will reward you with titles
+        <img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Event-title-icon.png"
+             alt="Titles"
+             style="height:32px; vertical-align:middle; border-radius:4px; margin:0 4px;">
+        and items to barter with Bingo Badges
+        <img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Token_of_Salutation-icon.png"
+             alt="Bingo Badges"
+             style="height:32px; vertical-align:middle; border-radius:4px; margin-left:4px;">.
+        The quest line is beginner friendly and will follow along with you as you progress through the epic quest.
+        There are a few quests that are a bit frustrating and obtuse — we will help you with those.
       </p>
-      <h3 class="fade-item" style="--i:2">Bingo's Scattered Thoughts</h3>
-      <p class="fade-item" style="--i:3">
+
+      <!-- Example earlier quest -->
+      <h3 class="fade-item" style="--i:35">Bingo's Obtuse Riddles</h3>
+      <p class="fade-item" style="--i:37">
+      Bingo has composed several strange riddles that will test your wit and patience. 
+       Speak to him in Rivendell to begin, and travel across Middle-earth to solve each clue. 
+       Some riddles require keen observation — don’t worry, we’ll help decipher the trickier ones!
+      </p>
+
+      <!-- Existing quest section -->
+      <h3 class="fade-item" style="--i:40">Bingo's Scattered Thoughts</h3>
+      <p class="fade-item" style="--i:50">
         Speak to dwarves for hints in the Twenty-First Hall and Flaming Deeps.
       </p>
 
       <ul style="margin:0; padding-left:0;">
-        <li class="fade-item" style="--i:4">
-          <input type="checkbox" />
+        <li class="fade-item" style="--i:60">
+          <input type="checkbox">
           <span>Defeat 2 Morovial Scouts in the Fanged Pit
             <span class="coord">3.5S, 103.3W</span>
           </span>
         </li>
 
-        <li class="fade-item" style="--i:5">
-          <input type="checkbox" />
+        <li class="fade-item" style="--i:70">
+          <input type="checkbox">
           <span>Defeat 3 White Hand Orcs near Orc-Watch, Malmezel
             <span class="coord">12.0S, 106.1W</span>
           </span>
         </li>
 
-        <li class="fade-item" style="--i:6">
-          <input type="checkbox" />
-          <span>Defeat 4 (2 Warg Riders, 2 Moria Warriors) near Orc-Watch, Budkhul-thârkh
+        <li class="fade-item" style="--i:80">
+          <input type="checkbox">
+          <span>Defeat 2 Warg Riders and 2 Moria Warriors near Orc-Watch, Budkhul-thârkh
             <span class="coord">11.8S, 107.0W</span>
           </span>
         </li>
@@ -78,6 +151,4 @@
   </details>
 
 </body>
-<footer style="text-align:center; margin-top:80px; padding:24px 0; color:#888; font-size:14px; letter-spacing:0.05em;">
-  &copy; 2025 Linala. All rights reserved.
 </html>
