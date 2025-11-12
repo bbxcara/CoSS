@@ -4,17 +4,24 @@
   <meta charset="UTF-8">
   <title>Bingo Boffin QuestLine</title>
   <style>
-    .cursor-glow {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    background: rgb(238,174,202);
-    background: -moz-radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(238,174,202,0.2) 100%);
-    box-shadow: 0px 0px 20px rgb(255, 252, 253);
-    background: radial-gradient(circle, rgba(238,174,202,0.8) 0%, rgba(255, 255, 255, 0.2) 100%);
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
+.cursor-glow {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(238,174,202,0.8) 0%, rgba(238,174,202,0.2) 100%);
+  box-shadow: 0 0 20px rgba(238,174,202,1);
+  position: fixed;            /* follows the viewport, not a container */
+  left: 0;
+  top: 0;
+  pointer-events: none;        /* don’t block clicks */
+  mix-blend-mode: screen;      /* optional: nice glow on dark bg */
+  z-index: 9999;
+
+  /* center the dot under the cursor */
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  opacity: 0.8;                /* tweak to taste */
+}
 }
     body {
       background: #000;
