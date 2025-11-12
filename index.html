@@ -1,86 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Company of the Silver Swan — Launching soon</title>
-  <meta name="description" content="Company of the Silver Swan — Launching soon. We are currently making some improvements to our website." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Bingo Boffin QuestLine</title>
   <style>
-    :root{--bg:#000;--text:#e7e7e7;--muted:#b6b6b6}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
-    .wrap{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:clamp(24px,4vw,96px)}
-    .inner{max-width:1000px;text-align:center;width:100%}
-    .brand{letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--muted);font-size:clamp(12px,1.2vw,18px);margin-bottom:clamp(40px,6vh,96px)}
-    h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:500;color:#bfbfbf;margin:0 0 8px;line-height:.9;letter-spacing:.01em;font-size:clamp(56px,10vw,164px)}
-    h1 .subline{display:block;font-size:clamp(40px,8vw,110px)}
-    p.lead{color:#c8c8c8;font-size:clamp(18px,2.4vw,28px);line-height:1.6;max-width:60ch;margin:24px auto 0}
-    /* subtle motion */
-    .fade{opacity:0;transform:translateY(8px);animation:fadeUp .9s ease both}
-    .fade.d1{animation-delay:.1s}
-    .fade.d2{animation-delay:.25s}
-    .fade.d3{animation-delay:.5s}
-    @keyframes fadeUp{to{opacity:1;transform:none}}
-    /* prefers-reduced-motion */
-    @media (prefers-reduced-motion: reduce){.fade{animation:none;opacity:1;transform:none}}
+    body {
+      background: #000;
+      color: #eaeaea;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
 
-    .gradient-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  background: linear-gradient(90deg, #bfbfbf, #ffffff, #bfbfbf);
-  background-size: 200% auto;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: shimmer 3s linear infinite;
-  transition: opacity 0.3s ease;
-}
+    details {
+      max-width: 900px;
+      margin: 24px auto;
+      background: #1f1f1f;
+      border: 1px solid #444;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      line-height: 1.6;
+      overflow: hidden;
+    }
 
-.gradient-text:hover {
-  opacity: 0.9;
-}
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #f2c44c;
+      outline: none;
+      display: flex;
+      align-items: center;
+    }
 
-@keyframes shimmer {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-    
+    /* ▶ Arrow base (points right initially) */
+    summary .arrow {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-right: 8px;
+      vertical-align: middle;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid #f2c44c;
+      transition: transform 0.25s ease;
+      transform-origin: center;
+    }
+
+    /* ▼ Rotated arrow when expanded */
+    details[open] summary .arrow {
+      transform: rotate(90deg);
+    }
+
+    /* Subtle glow when open */
+    details[open] summary {
+      color: #ffd86b;
+      text-shadow: 0 0 6px rgba(242, 196, 76, 0.4);
+    }
+
+    /* --- Smooth fade animation system --- */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-group {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    details[open] .fade-group {
+      animation: fadeIn 0.6s ease forwards;
+      animation-delay: calc(var(--g, 1) * 220ms);
+    }
+
+    li {
+      margin: 10px 0;
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: #f2c44c;
+    }
+
+    .coord {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border: 1px solid #555;
+      border-radius: 9999px;
+      background: #2a2a2a;
+      font-size: 0.85em;
+    }
+
+    h3 {
+      margin: 8px 0 8px;
+      font-size: 1.1rem;
+      color: #ffd86b;
+    }
+
+    /* Riddle block */
+    blockquote {
+      margin: 10px 20px;
+      padding: 10px 15px;
+      border-left: 3px solid #f2c44c;
+      background: #222;
+      font-style: italic;
+      border-radius: 6px;
+      line-height: 1.5;
+      white-space: pre-wrap; /* preserves line breaks but ignores leading empty ones */
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-group,
+      details[open] .fade-group {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <main class="inner">
-      <div class="brand fade d1">Company of the Silver Swan</div>
-      <h1 class="fade d2">Launching <span class="subline">soon!</span></h1>
-      <p class="lead fade d3">We are currently making some improvements to our website!</p>
-<div class="fade d3" style="margin-top:48px; text-align:center;">
-  <img
-    src="https://raw.githubusercontent.com/bbxcara/CoSS/main/The_one_ring_animated.gif"
-    alt="loading"
-    style="max-width:10%; height:auto; display:inline-block; vertical-align:middle;">
-</div>
-<div class="fade d3" style="margin-top:48px; text-align:center;">
-  <img
-    src="https://raw.githubusercontent.com/bbxcara/CoSS/main/Andreth%20mellon.png"
-    alt="Company of the Silver Swan mark"
-    style="max-width:25%; height:auto; display:inline-block; vertical-align:middle;">
-</div>
-    </main>
-  </div>
-<!-- Continue to Sandbox with animated gradient text -->
-<div class="fade d3" style="margin-top:32px; text-align:center;">
-  <a href="sandbox.html" class="gradient-text">
-    Continue to Sandbox ➜
-  </a>
-</div>
-  </a>
-</div>
+
+  <details>
+    <summary><span class="arrow"></span>Bingo Boffin QuestLine</summary>
+    <div style="margin-top:14px;">
+
+      <!-- Group 1: Intro -->
+      <section class="fade-group" style="--g:1">
+        <p>
+          Go with Mr. Boffin on adventures and he will reward you with titles
+          <img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Event-title-icon.png"
+               alt="Titles" style="height:32px; vertical-align:middle; border-radius:4px; margin:0 4px;">
+          and items to barter with Bingo Badges
+          <img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Token_of_Salutation-icon.png"
+               alt="Bingo Badges" style="height:32px; vertical-align:middle; border-radius:4px; margin-left:4px;">.
+          The quest line is beginner friendly and will follow along with you as you progress through the epic quest.
+          There are a few quests that are a bit frustrating and obtuse — we will help you with those.
+        </p>
+      </section>
+
+      <!-- Group 2: Riddles -->
+      <section class="fade-group" style="--g:2">
+        <h3>Bingo's Obtuse Riddles</h3>
+        <p><b>📜 Theodore's Riddle:</b></p>
+        <blockquote>
+The torrent flows, blanketed in the shadow of only morning.
+A sentinel stares from on high; only he still watches.
+The red squirrel once dared the climb, but Time fells all.
+        </blockquote>
+        <p><b>💡 Hint:</b> Go to the Eglain Camp and look for a bridge near the South Downs.</p>
+      </section>
+
+      <!-- Group 3: Scattered Thoughts -->
+      <section class="fade-group" style="--g:3">
+        <h3>Bingo's Scattered Thoughts</h3>
+        <p>Speak to dwarves for hints in the Twenty-First Hall and Flaming Deeps.</p>
+        <ul style="margin:0; padding-left:0;">
+          <li>
+            <input type="checkbox">
+            <span>Defeat 2 Morovial Scouts in the Fanged Pit <span class="coord">3.5S, 103.3W</span></span>
+          </li>
+          <li>
+            <input type="checkbox">
+            <span>Defeat 3 White Hand Orcs near Orc-Watch, Malmezel <span class="coord">12.0S, 106.1W</span></span>
+          </li>
+          <li>
+            <input type="checkbox">
+            <span>Defeat 2 Warg Riders and 2 Moria Warriors near Orc-Watch, Budkhul-thârkh <span class="coord">11.8S, 107.0W</span></span>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </details>
+
 </body>
-<footer style="text-align:center; margin-top:80px; padding:24px 0; color:#888; font-size:14px; letter-spacing:0.05em;">
-  &copy; 2025 Linala. All rights reserved.
-</footer>
 </html>
