@@ -8,79 +8,109 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#000;--text:#e7e7e7;--muted:#b6b6b6}
-    *{box-sizing:border-box}
+    *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
-    .wrap{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:clamp(24px,4vw,96px)}
-    .inner{max-width:1000px;text-align:center;width:100%}
-    .brand{letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--muted);font-size:clamp(12px,1.2vw,18px);margin-bottom:clamp(40px,6vh,96px)}
-    h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:500;color:#bfbfbf;margin:0 0 8px;line-height:.9;letter-spacing:.01em;font-size:clamp(56px,10vw,164px)}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:clamp(24px,4vw,96px);
+      text-align:center;
+    }
+
+    .brand{
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:600;
+      color:var(--muted);
+      font-size:clamp(12px,1.2vw,18px);
+      margin-bottom:clamp(40px,6vh,96px)
+    }
+
+    h1{
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-weight:500;
+      color:#bfbfbf;
+      margin-bottom:8px;
+      line-height:.9;
+      letter-spacing:.01em;
+      font-size:clamp(56px,10vw,164px)
+    }
+
     h1 .subline{display:block;font-size:clamp(40px,8vw,110px)}
     p.lead{color:#c8c8c8;font-size:clamp(18px,2.4vw,28px);line-height:1.6;max-width:60ch;margin:24px auto 0}
-    /* subtle motion */
+
+    /* fade animation */
     .fade{opacity:0;transform:translateY(8px);animation:fadeUp .9s ease both}
     .fade.d1{animation-delay:.1s}
     .fade.d2{animation-delay:.25s}
     .fade.d3{animation-delay:.5s}
     @keyframes fadeUp{to{opacity:1;transform:none}}
-    /* prefers-reduced-motion */
-    @media (prefers-reduced-motion: reduce){.fade{animation:none;opacity:1;transform:none}}
 
-    .gradient-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  background: linear-gradient(90deg, #bfbfbf, #ffffff, #bfbfbf);
-  background-size: 200% auto;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: shimmer 3s linear infinite;
-  transition: opacity 0.3s ease;
-}
+    /* gradient animated link */
+    .gradient-text{
+      font-family:'Inter',sans-serif;
+      font-size:20px;
+      letter-spacing:0.05em;
+      text-decoration:none;
+      background:linear-gradient(90deg,#bfbfbf,#ffffff,#bfbfbf);
+      background-size:200% auto;
+      color:transparent;
+      background-clip:text;
+      -webkit-background-clip:text;
+      animation:shimmer 3s linear infinite;
+      transition:opacity .3s ease;
+    }
+    .gradient-text:hover{opacity:.9}
+    @keyframes shimmer{
+      0%{background-position:200% center}
+      100%{background-position:-200% center}
+    }
 
-.gradient-text:hover {
-  opacity: 0.9;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-    
+    footer{
+      margin-top:80px;
+      padding:24px 0;
+      color:#888;
+      font-size:14px;
+      letter-spacing:0.05em;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <main class="inner">
-      <div class="brand fade d1">Company of the Silver Swan</div>
-      <h1 class="fade d2">Launching <span class="subline">soon!</span></h1>
-      <p class="lead fade d3">We are currently making some improvements to our website!</p>
-<div class="fade d3" style="margin-top:48px; text-align:center;">
-  <img
-    src="https://raw.githubusercontent.com/bbxcara/CoSS/main/The_one_ring_animated.gif"
-    alt="loading"
-    style="max-width:10%; height:auto; display:inline-block; vertical-align:middle;">
-</div>
-<div class="fade d3" style="margin-top:48px; text-align:center;">
-  <img
-    src="https://raw.githubusercontent.com/bbxcara/CoSS/main/Andreth%20mellon.png"
-    alt="Company of the Silver Swan mark"
-    style="max-width:25%; height:auto; display:inline-block; vertical-align:middle;">
-</div>
-    </main>
+
+  <div class="brand fade d1">Company of the Silver Swan</div>
+  <h1 class="fade d2">Launching <span class="subline">soon!</span></h1>
+  <p class="lead fade d3">We are currently making some improvements to our website!</p>
+
+  <!-- Animated Ring GIF -->
+  <div class="fade d3" style="margin-top:48px;">
+    <img
+      src="https://raw.githubusercontent.com/bbxcara/CoSS/main/The_one_ring_animated.gif"
+      alt="Animated Ring"
+      style="max-width:50%;height:auto;display:inline-block;vertical-align:middle;">
   </div>
-<!-- Continue to Sandbox with animated gradient text -->
-<div class="fade d3" style="margin-top:32px; text-align:center;">
-  <a href="sandbox.html" class="gradient-text">
-    Continue to Sandbox ➜
-  </a>
-</div>
-  </a>
-</div>
+
+  <!-- Tengwar Image -->
+  <div class="fade d3" style="margin-top:48px;">
+    <img
+      src="https://raw.githubusercontent.com/bbxcara/CoSS/main/Andreth%20mellon.png"
+      alt="Tengwar inscription"
+      style="width:600px;max-width:80%;height:auto;">
+  </div>
+
+  <!-- Continue to Sandbox link -->
+  <div class="fade d3" style="margin-top:32px;">
+    <a href="sandbox.html" class="gradient-text">Continue to Sandbox ➜</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="fade d3">
+    &copy; 2025 Linala. All rights reserved.
+  </footer>
+
 </body>
-<footer style="text-align:center; margin-top:80px; padding:24px 0; color:#888; font-size:14px; letter-spacing:0.05em;">
-  &copy; 2025 Linala. All rights reserved.
-</footer>
 </html>
