@@ -33,15 +33,20 @@
       outline: none;
     }
 
-    details[open] ul li {
+    /* Fade animation for all child content when expanded */
+    details[open] .fade-item {
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.6s ease forwards;
     }
 
-    details[open] ul li:nth-child(1) { animation-delay: 0.1s; }
-    details[open] ul li:nth-child(2) { animation-delay: 0.3s; }
-    details[open] ul li:nth-child(3) { animation-delay: 0.5s; }
+    /* Sequential fade delays */
+    details[open] .fade-item:nth-of-type(1) { animation-delay: 0.1s; }
+    details[open] .fade-item:nth-of-type(2) { animation-delay: 0.3s; }
+    details[open] .fade-item:nth-of-type(3) { animation-delay: 0.5s; }
+    details[open] .fade-item:nth-of-type(4) { animation-delay: 0.7s; }
+    details[open] .fade-item:nth-of-type(5) { animation-delay: 0.9s; }
+    details[open] .fade-item:nth-of-type(6) { animation-delay: 1.1s; }
 
     @keyframes fadeIn {
       to {
@@ -56,7 +61,6 @@
       display: flex;
       gap: 10px;
       align-items: flex-start;
-      transition: opacity 0.3s ease;
     }
 
     input[type="checkbox"] {
@@ -86,31 +90,31 @@
   <details>
     <summary>▾ Bingo Boffin QuestLine</summary>
     <div style="margin-top:14px;">
-      <p>
+      <p class="fade-item">
         Travel with Mr. Boffin for titles and Bingo Badges. The questline scales with your progress; we’ll highlight any tricky bits.
       </p>
 
-      <h3>Bingo's Scattered Thoughts</h3>
-      <p>
+      <h3 class="fade-item">Bingo's Scattered Thoughts</h3>
+      <p class="fade-item">
         Speak to dwarves for hints in the Twenty-First Hall and Flaming Deeps.
       </p>
 
       <ul style="margin:0; padding-left:0;">
-        <li>
+        <li class="fade-item">
           <input type="checkbox">
           <span>Defeat 2 Morovial Scouts in the Fanged Pit
             <span class="coord">3.5S, 103.3W</span>
           </span>
         </li>
 
-        <li>
+        <li class="fade-item">
           <input type="checkbox">
           <span>Defeat 3 White Hand Orcs near Orc-Watch, Malmezel
             <span class="coord">12.0S, 106.1W</span>
           </span>
         </li>
 
-        <li>
+        <li class="fade-item">
           <input type="checkbox">
           <span>Defeat 4 (2 Warg Riders, 2 Moria Warriors) near Orc-Watch, Budkhul-thârkh
             <span class="coord">11.8S, 107.0W</span>
