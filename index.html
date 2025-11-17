@@ -31,10 +31,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start; /* Prevent top cutoff */
+      justify-content: flex-start;
       padding: clamp(24px, 4vw, 96px);
-      padding-top: calc(24px + env(safe-area-inset-top)); /* iOS safe area */
-      min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+      padding-top: calc(24px + env(safe-area-inset-top));
+      min-height: 100dvh;
       text-align: center;
     }
 
@@ -45,11 +45,11 @@
       color: var(--muted);
       font-size: clamp(12px, 1.2vw, 18px);
       margin-bottom: clamp(40px, 6vh, 96px);
-      margin-top: clamp(16px, 8vh, 120px); /* Keeps space at the top */
+      margin-top: clamp(16px, 8vh, 120px);
     }
 
     h1 {
-      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      font-family: "Cormorant Garamond", Georgia, serif;
       font-weight: 500;
       color: #bfbfbf;
       margin-bottom: 8px;
@@ -96,9 +96,7 @@
       transition: opacity .3s ease;
     }
 
-    .gradient-text:hover {
-      opacity: .9;
-    }
+    .gradient-text:hover { opacity: .9; }
 
     @keyframes shimmer {
       0% { background-position: 200% center; }
@@ -113,12 +111,35 @@
       letter-spacing: 0.05em;
     }
 
-    /* ================================
-       BINGO'S HATRACK (SCOPED STYLES)
-       ================================ */
+    /* ==== GOLD ACCORDION (your Bingo style) ==== */
+
+    details.gold {
+      background: #1c1c1c;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin: 20px auto;
+      max-width: 900px;
+      text-align: left;
+      border: 1px solid #333;
+    }
+
+    details.gold > summary {
+      cursor: pointer;
+      color: #ffe08a;
+      font-size: 1.3rem;
+      font-weight: 700;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    details.gold > summary::-webkit-details-marker { display: none; }
+
+    /* ====== HATRACK (scoped styles) ====== */
 
     .hatrack {
-      margin-top: 48px;
+      margin-top: 32px;
       text-align: left;
       width: 100%;
       max-width: 900px;
@@ -143,7 +164,6 @@
       border: none;
       border-radius: 8px;
       padding: 6px 12px;
-      margin: 4px;
       font-size: 0.9rem;
       cursor: pointer;
       color: #000;
@@ -178,7 +198,7 @@
       background: #1a1a1a;
       border-radius: 10px;
       transition: 0.2s ease;
-      display: none; /* JS adds .visible */
+      display: none;
     }
 
     .hatrack details.step.visible {
@@ -220,9 +240,7 @@
       color: #eee;
     }
 
-    .hatrack summary::-webkit-details-marker {
-      display: none;
-    }
+    .hatrack summary::-webkit-details-marker { display: none; }
 
     .hatrack .loc {
       margin-left: 30px;
@@ -241,16 +259,14 @@
 
   <!-- Animated Ring GIF -->
   <div class="fade d3" style="margin-top:48px;">
-    <img
-      src="https://raw.githubusercontent.com/bbxcara/CoSS/main/The_one_ring_animated.gif"
+    <img src="https://raw.githubusercontent.com/bbxcara/CoSS/main/The_one_ring_animated.gif"
       alt="Animated Ring"
-      style="max-width:50%; height:auto; display:inline-block; vertical-align:middle;">
+      style="max-width:50%; height:auto;">
   </div>
 
   <!-- Tengwar Image -->
   <div class="fade d3" style="margin-top:48px;">
-    <img
-      src="https://raw.githubusercontent.com/bbxcara/CoSS/main/Andreth%20mellon.png"
+    <img src="https://raw.githubusercontent.com/bbxcara/CoSS/main/Andreth%20mellon.png"
       alt="Tengwar inscription"
       style="width:600px; max-width:80%; height:auto;">
   </div>
@@ -260,60 +276,77 @@
     <a href="sandbox.html" class="gradient-text">Continue to Sandbox ➜</a>
   </div>
 
-  <!-- Bingo's Hatrack section -->
-  <section class="hatrack fade d3">
-    <h3>Bingo's Hatrack</h3>
+  <!-- ⭐ FIXED: Bingo Boffin QuestLine now gold styled -->
+  <details class="gold fade d3" open>
+    <summary>Bingo Boffin QuestLine</summary>
 
-    <div class="hatrack-controls">
-      <button id="hatrackToggle" onclick="toggleHatrack()">Show All</button>
-    </div>
+    <!-- Bingo text here if you want -->
 
-    <div class="hatrack-chain">
+    <!-- Hatrack Section -->
+    <section class="hatrack">
+      <h3>Bingo's Hatrack</h3>
 
-      <details class="step">
-        <summary><span class="step-badge">1</span>Michel Delving</summary>
-        <div class="loc">Shire</div>
-      </details>
+      <div class="hatrack-controls">
+        <button id="hatrackToggle" onclick="toggleHatrack()">Show All</button>
+      </div>
 
-      <details class="step">
-        <summary><span class="step-badge">2</span>Ost Guruth</summary>
-        <div class="loc">Bree-land</div>
-      </details>
+      <div class="hatrack-chain">
 
-      <details class="step">
-        <summary><span class="step-badge">3</span>Rivendell</summary>
-        <div class="loc">Lone-lands</div>
-      </details>
+        <details class="step">
+          <summary><span class="step-badge">1</span>Michel Delving</summary>
+          <div class="loc">Shire</div>
+        </details>
 
-      <details class="step">
-        <summary><span class="step-badge">4</span>Gwingris</summary>
-        <div class="loc">Misty Mountains</div>
-      </details>
+        <details class="step">
+          <summary><span class="step-badge">2</span>Ost Guruth</summary>
+          <div class="loc">Bree-land</div>
+        </details>
 
-      <details class="step">
-        <summary><span class="step-badge">5</span>Caras Galadhon</summary>
-        <div class="loc">Moria</div>
-      </details>
+        <details class="step">
+          <summary><span class="step-badge">3</span>Rivendell</summary>
+          <div class="loc">Lone-lands</div>
+        </details>
 
-      <details class="step">
-        <summary><span class="step-badge">6</span>Haunted Inn</summary>
-        <div class="loc">Lothlórien</div>
-      </details>
+        <details class="step">
+          <summary><span class="step-badge">4</span>Gwingris</summary>
+          <div class="loc">Misty Mountains</div>
+        </details>
 
-      <details class="step">
-        <summary><span class="step-badge">7</span>The Great River</summary>
-        <div class="loc">Mirkwood</div>
-      </details>
+        <details class="step">
+          <summary><span class="step-badge">5</span>Caras Galadhon</summary>
+          <div class="loc">Moria</div>
+        </details>
 
-      <details class="step">
-        <summary><span class="step-badge">8</span>Harwick in The Wold</summary>
-        <div class="loc">Great River</div>
-      </details>
+        <details class="step">
+          <summary><span class="step-badge">6</span>Haunted Inn</summary>
+          <div class="loc">Lothlórien</div>
+        </details>
 
-    </div>
-  </section>
+        <details class="step">
+          <summary><span class="step-badge">7</span>The Great River</summary>
+          <div class="loc">Mirkwood</div>
+        </details>
 
-  <!-- Footer -->
+        <details class="step">
+          <summary><span class="step-badge">8</span>Harwick in The Wold</summary>
+          <div class="loc">Great River</div>
+        </details>
+
+      </div>
+    </section>
+
+    <details class="gold">
+      <summary>Bingo's Obtuse Riddles</summary>
+      <!-- Your riddles content -->
+    </details>
+
+    <details class="gold">
+      <summary>Bingo's Scattered Thoughts</summary>
+      <!-- Your content here -->
+    </details>
+
+  </details>
+
   <footer class="fade d3">
     Company of the Silver Swan is not affiliated with or endorsed by Standing Stone Games or Middle Earth Enterprises.<br>
     All trademarks, copyrights,intellectual property related to The Lord of the Rings Online™ belong to their respective owners.<br>
@@ -322,7 +355,7 @@
   </footer>
 
   <script>
-    // Bingo's Hatrack logic (scoped to .hatrack)
+    /* Hatrack logic */
     (function () {
       const hatrack = document.querySelector(".hatrack");
       if (!hatrack) return;
@@ -330,24 +363,18 @@
       const steps = Array.from(hatrack.querySelectorAll("details.step"));
       const btn = hatrack.querySelector("#hatrackToggle");
 
-      // initial: only first step visible
-      if (steps.length > 0) {
-        steps[0].classList.add("visible");
-      }
+      if (steps.length > 0) steps[0].classList.add("visible");
 
-      // progressive unlock
       steps.forEach((step, index) => {
         step.addEventListener("toggle", () => {
           if (step.open) {
-            if (steps[index + 1]) {
-              steps[index + 1].classList.add("visible");
-            }
+            if (steps[index + 1]) steps[index + 1].classList.add("visible");
           } else {
             for (let i = index + 1; i < steps.length; i++) {
               steps[i].classList.remove("visible");
               steps[i].open = false;
             }
-            if (btn) btn.textContent = "Show All";
+            btn.textContent = "Show All";
           }
         });
       });
@@ -362,17 +389,14 @@
             s.classList.add("visible");
             s.open = true;
           });
-          if (btn) btn.textContent = "Hide All";
+          btn.textContent = "Hide All";
         } else {
           steps.forEach((s, i) => {
             s.open = false;
-            if (i === 0) {
-              s.classList.add("visible");
-            } else {
-              s.classList.remove("visible");
-            }
+            if (i === 0) s.classList.add("visible");
+            else s.classList.remove("visible");
           });
-          if (btn) btn.textContent = "Show All";
+          btn.textContent = "Show All";
         }
       };
     })();
