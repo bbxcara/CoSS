@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bingo's Hatrack</title>
+
+<style>
+  body {
+    background: #000;
+    color: #eee;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 sans-serif;
+    padding: 30px 16px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #f3d9a4;
+    margin-bottom: 18px;
+    letter-spacing: 0.06em;
+  }
+
+  /* BUTTON */
+  .hatrack-controls {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .hatrack-controls button {
+    background: #c6a667;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #000;
+    font-weight: 600;
+  }
+
+  .hatrack-controls button:hover {
+    background: #e2c78e;
+  }
+
+  /* TIMELINE CONTAINER */
+  .hatrack-chain {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 26px;
+  }
+
+  .hatrack-chain::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: #c6a667;
+    opacity: 0.45;
+  }
+
+  /* CLEAN BUBBLE – no blur, no glow */
+  details.step {
+    margin: 18px 0;
+    padding: 12px 14px;
+    background: #1a1a1a;          /* clean solid panel */
+    border-radius: 10px;          /* subtle but sharp */
+    transition: 0.2s ease;
+    display: none;                /* hidden by default */
+  }
+
+  details.step.visible {
+    display: block;
+  }
+
+  /* NO GLOW – only slight lift on hover */
+  details.step:hover {
+    background: #222;
+  }
+
+  /* BADGE */
+  .step-badge {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 1px solid #c6a667;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    background: #000;
+    color: #f3d9a4;
+    flex-shrink: 0;
+    transition: 0.2s ease;
+  }
+
+  /* BADGE hover only */
+  summary:hover .step-badge {
+    background: #555555;
+    color: #fdfdfd;
+    border-color: #fff;
+  }
+
+  summary {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    font-size: 1rem;
+    color: #eee;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* ZONE TEXT */
+  .loc {
+    margin-left: 30px;
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: #e8c78a;
+    opacity: 0.85;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Bingo's Hatrack</h2>
+
+<div class="hatrack-controls">
+  <button id="toggleButton" onclick="toggleAll()">Show All</button>
+</div>
+
+<div class="hatrack-chain">
+
+  <details class="step">
+    <summary><span class="step-badge">1</span>Michel Delving</summary>
+    <div class="loc">Shire</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">2</span>Ost Guruth</summary>
+    <div class="loc">Bree-land</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">3</span>Rivendell</summary>
+    <div class="loc">Lone-lands</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">4</span>Gwingris</summary>
+    <div class="loc">Misty Mountains</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">5</span>Caras Galadhon</summary>
+    <div class="loc">Moria</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">6</span>Haunted Inn</summary>
+    <div class="loc">Lothlórien</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">7</span>The Great River</summary>
+    <div class="loc">Mirkwood</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">8</span>Harwick in The Wold</summary>
+    <div class="loc">Great River</div>
+  </details>
+
+</div>
+
+<script>
+  const steps = Array.from(document.querySelectorAll("details.step"));
+  const btn = document.getElementById("toggleButton");
+
+  // initial: only first step visible
+  if (steps.length > 0) {
+    steps[0].classList.add("visible");
+  }
+
+  // progressive unlock logic
+  steps.forEach((step, index) => {
+    step.addEventListener("toggle", () => {
+      if (step.open) {
+        if (steps[index + 1]) {
+          steps[index + 1].classList.add("visible");
+        }
+      } else {
+        for (let i = index + 1; i < steps.length; i++) {
+          steps[i].classList.remove("visible");
+          steps[i].open = false;
+        }
+        btn.textContent = "Show All";
+      }
+    });
+  });
+
+  function toggleAll() {
+    const allVisibleAndOpen = steps.every(
+      (s) => s.classList.contains("visible") && s.open
+    );
+
+    if (!allVisibleAndOpen) {
+      steps.forEach((s) => {
+        s.classList.add("visible");
+        s.open = true;
+      });
+      btn.textContent = "Hide All";
+    } else {
+      steps.forEach((s, i) => {
+        s.open = false;
+        if (i === 0) {
+          s.classList.add("visible");
+        } else {
+          s.classList.remove("visible");
+        }
+      });
+      btn.textContent = "Show All";
+    }
+  }
+</script>
+
+</body>
+</html>
