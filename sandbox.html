@@ -149,6 +149,105 @@ footer a:hover {
   color: #888;
   text-decoration: underline;
 }
+
+.hatrack-controls {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.hatrack-controls button {
+  background: #c6a667;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #000;
+  font-weight: 600;
+}
+
+.hatrack-controls button:hover {
+  background: #e2c78e;
+}
+
+.hatrack-chain {
+  max-width: 480px;
+  margin: 0 auto 10px auto;
+  position: relative;
+  padding-left: 26px;
+}
+
+.hatrack-chain::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: #c6a667;
+  opacity: 0.45;
+}
+
+details.step {
+  margin: 18px 0;
+  padding: 12px 14px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  transition: 0.2s ease;
+  display: none; /* JS will turn on .visible */
+}
+
+details.step.visible {
+  display: block;
+}
+
+details.step:hover {
+  background: #222;
+}
+
+.step-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid #c6a667;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  background: #000;
+  color: #f3d9a4;
+  flex-shrink: 0;
+  transition: 0.2s ease;
+}
+
+summary:hover .step-badge {
+  background: #fff;
+  color: #c6a667;
+  border-color: #fff;
+}
+
+summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  font-size: 1rem;
+  color: #eee;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.loc {
+  margin-left: 30px;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #e8c78a;
+  opacity: 0.85;
+}
   </style>
 </head>
 <body>
@@ -169,11 +268,55 @@ footer a:hover {
           The quest line is beginner friendly and will follow along with you as you progress through the epic quest.
           There are a few quests that are a bit frustrating and obtuse — we will help you with those.
         </p>
-        <p>
-          <iframe src="BingosHatrack.html" 
-        style="width:100%; height:900px; border:none; border-radius:12px; overflow:hidden;">
-</iframe>
-        </p>
+            <h3>Bingo's Hatrack</h3>
+
+<div class="hatrack-controls">
+  <button id="toggleButton" onclick="toggleAll()">Show All</button>
+</div>
+
+<div class="hatrack-chain">
+
+  <details class="step">
+    <summary><span class="step-badge">1</span>Michel Delving</summary>
+    <div class="loc">Shire</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">2</span>Ost Guruth</summary>
+    <div class="loc">Bree-land</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">3</span>Rivendell</summary>
+    <div class="loc">Lone-lands</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">4</span>Gwingris</summary>
+    <div class="loc">Misty Mountains</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">5</span>Caras Galadhon</summary>
+    <div class="loc">Moria</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">6</span>Haunted Inn</summary>
+    <div class="loc">Lothlórien</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">7</span>The Great River</summary>
+    <div class="loc">Mirkwood</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">8</span>Harwick in The Wold</summary>
+    <div class="loc">Great River</div>
+  </details>
+
+</div>
       </section>
 
       <!-- Group 2: Riddles -->
@@ -234,4 +377,55 @@ This is the development sandbox where you can preview the content we are working
   </footer>
 </body>
 
+<!-- JS STEP -->
+<script>
+  const steps = Array.from(document.querySelectorAll("details.step"));
+  const btn = document.getElementById("toggleButton");
+
+  // initial: only first step visible
+  if (steps.length > 0) {
+    steps[0].classList.add("visible");
+  }
+
+  // progressive unlock logic
+  steps.forEach((step, index) => {
+    step.addEventListener("toggle", () => {
+      if (step.open) {
+        if (steps[index + 1]) {
+          steps[index + 1].classList.add("visible");
+        }
+      } else {
+        for (let i = index + 1; i < steps.length; i++) {
+          steps[i].classList.remove("visible");
+          steps[i].open = false;
+        }
+        btn.textContent = "Show All";
+      }
+    });
+  });
+
+  function toggleAll() {
+    const allVisibleAndOpen = steps.every(
+      (s) => s.classList.contains("visible") && s.open
+    );
+
+    if (!allVisibleAndOpen) {
+      steps.forEach((s) => {
+        s.classList.add("visible");
+        s.open = true;
+      });
+      btn.textContent = "Hide All";
+    } else {
+      steps.forEach((s, i) => {
+        s.open = false;
+        if (i === 0) {
+          s.classList.add("visible");
+        } else {
+          s.classList.remove("visible");
+        }
+      });
+      btn.textContent = "Show All";
+    }
+  }
+</script>
 </html>
