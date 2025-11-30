@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bingo Boffin QuestLine</title>
+  <style>
+    a {
+  color: #eaeaea; /* make all links white */
+
+    }
+    body {
+      background: #000;
+      color: #eaeaea;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    details {
+      max-width: 900px;
+      margin: 24px auto;
+      background: #1f1f1f;
+      border: 1px solid #444;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      line-height: 1.6;
+      overflow: hidden;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #f2c44c;
+      outline: none;
+      display: flex;
+      align-items: center;
+    }
+
+    /* ▶ Arrow base (points right initially) */
+    summary .arrow {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-right: 8px;
+      vertical-align: middle;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid #f2c44c;
+      transition: transform 0.25s ease;
+      transform-origin: center;
+    }
+
+    /* ▼ Rotated arrow when expanded */
+    details[open] summary .arrow {
+      transform: rotate(90deg);
+    }
+
+    /* Subtle glow when open */
+    details[open] summary {
+      color: #ffd86b;
+      text-shadow: 0 0 6px rgba(242, 196, 76, 0.4);
+    }
+
+    /* --- Smooth fade animation system --- */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-group {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    details[open] .fade-group {
+      animation: fadeIn 0.6s ease forwards;
+      animation-delay: calc(var(--g, 1) * 220ms);
+    }
+
+    li {
+      margin: 10px 0;
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: #f2c44c;
+    }
+
+    .coord {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border: 1px solid #555;
+      border-radius: 9999px;
+      background: #2a2a2a;
+      font-size: 0.85em;
+    }
+
+    h3 {
+      margin: 8px 0 8px;
+      font-size: 1.1rem;
+      color: #ffd86b;
+    }
+
+    /* Riddle block */
+    blockquote {
+      margin: 10px 20px;
+      padding: 10px 15px;
+      border-left: 3px solid #f2c44c;
+      background: #222;
+      font-style: italic;
+      border-radius: 6px;
+      line-height: 1.5;
+      white-space: pre-wrap; /* preserves line breaks but ignores leading empty ones */
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-group,
+      details[open] .fade-group {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 24px 0;
+      color: #888;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+footer a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+footer a:hover {
+  color: #888;
+  text-decoration: underline;
+}
+
+.hatrack-controls {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.hatrack-controls button {
+  background: #c6a667;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #000;
+  font-weight: 600;
+}
+
+.hatrack-controls button:hover {
+  background: #e2c78e;
+}
+
+.hatrack-chain {
+  max-width: 480px;
+  margin: 0 auto 10px auto;
+  position: relative;
+  padding-left: 26px;
+}
+
+.hatrack-chain::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: #c6a667;
+  opacity: 0.45;
+}
+
+details.step {
+  margin: 18px 0;
+  padding: 12px 14px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  transition: 0.2s ease;
+  display: none; /* JS will turn on .visible */
+}
+
+details.step.visible {
+  display: block;
+}
+
+details.step:hover {
+  background: #222;
+}
+
+.step-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid #c6a667;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  background: #000;
+  color: #f3d9a4;
+  flex-shrink: 0;
+  transition: 0.2s ease;
+}
+
+summary:hover .step-badge {
+  background: #fff;
+  color: #c6a667;
+  border-color: #fff;
+}
+
+summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  font-size: 1rem;
+  color: #eee;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.loc {
+  margin-left: 30px;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #e8c78a;
+  opacity: 0.85;
+}
+  </style>
+</head>
+<body>
+
+  <details>
+    <summary><span class="arrow"></span>Bingo Boffin QuestLine</summary>
+    <div style="margin-top:14px;">
+
+      <!-- Group 1: Intro -->
+      <section class="fade-group" style="--g:1">
+        <p>
+          Go with Mr. Boffin on adventures and he will reward you with Titles
+          <img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Event-title-icon.png"
+               alt="Titles" style="height:32px; vertical-align:middle; border-radius:4px; margin:0 4px;">
+          and <a href="https://lotro-wiki.com/wiki/Bert_Bartleby">items</a> to barter with Bingo Badges
+          <img src="https://cdn.jsdelivr.net/gh/bbxcara/CoSS@main/Token_of_Salutation-icon.png"
+               alt="Bingo Badges" style="height:32px; vertical-align:middle; border-radius:4px; margin-left:4px;">.
+          The quest line is beginner friendly and will follow along with you as you progress through the epic quest.
+          There are a few quests that are a bit frustrating and obtuse — we will help you with those.
+        </p>
+            <h3>Bingo's Hatrack</h3>
+
+<div class="hatrack-controls">
+  <button id="toggleButton" onclick="toggleAll()">Show All</button>
+</div>
+
+<div class="hatrack-chain">
+
+  <details class="step">
+    <summary><span class="step-badge">1</span>Michel Delving</summary>
+    <div class="loc">Shire</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">2</span>Ost Guruth</summary>
+    <div class="loc">Bree-land</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">3</span>Rivendell</summary>
+    <div class="loc">Lone-lands</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">4</span>Gwingris</summary>
+    <div class="loc">Misty Mountains</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">5</span>Caras Galadhon</summary>
+    <div class="loc">Moria</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">6</span>Haunted Inn</summary>
+    <div class="loc">Lothlórien</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">7</span>The Great River</summary>
+    <div class="loc">Mirkwood</div>
+  </details>
+
+  <details class="step">
+    <summary><span class="step-badge">8</span>Harwick in The Wold</summary>
+    <div class="loc">Great River</div>
+  </details>
+
+</div>
+      </section>
+
+      <!-- Group 2: Riddles -->
+<section class="fade-group" style="--g:2">
+  <details>
+    <summary><span class="arrow"></span>Bingo's Obtuse Riddles</summary>
+    <div style="margin-top:10px;">
+      <p><b>📜 Theodore's Riddle:</b></p>
+      <blockquote>
+The torrent flows, blanketed in the shadow of only morning.
+A sentinel stares from on high; only he still watches.
+The red squirrel once dared the climb, but Time fells all.
+      </blockquote>
+      <p><b>💡 Hint:</b> Look for the fallen tree at Weathertop; you can cross it without falling.</p>
+
+      <p><b>📜 Cryptic Message:</b></p>
+      <blockquote>
+whaT's good for the goose is good for the gander.
+and what's bad for tHe cad is a tad over yonder.
+goblins and spiders and plotting and fightErs.
+Lest Our Relative Novice Seem Perplexed And Nonplussed,
+too many spell danger, so look to the spell for the answer
+      </blockquote>
+      <p><b>💡 Hint:</b> Go to the Eglain Camp and look for a bridge near the South Downs.</p>
+    </div>
+  </details>
+</section>
+
+<!-- Group 3: Scattered Thoughts -->
+<section class="fade-group" style="--g:3">
+  <details>
+    <summary><span class="arrow"></span>Bingo's Scattered Thoughts</summary>
+    <div style="margin-top:10px;">
+      <p>💬 Speak to Dwarves for hints in the Twenty-First Hall and Flaming Deeps.</p>
+      <ul style="margin:0; padding-left:0;">
+        <li>
+          <span>⚔️ Defeat 2 Morovial Scouts in the Fanged Pit <span class="coord">3.5S, 103.3W</span></span>
+        </li>
+        <li>
+          <span>⚔️ Defeat 3 White Hand Orcs near Orc-Watch, Malmezel <span class="coord">12.0S, 106.1W</span></span>
+        </li>
+        <li>
+          <span>⚔️ Defeat 2 Warg Riders and 2 Moria Warriors near Orc-Watch, Budkhul-thârkh <span class="coord">11.8S, 107.0W</span></span>
+        </li>
+      </ul>
+    </div>
+  </details>
+</section>
+    </div>
+  </details>
+  <div>
+
+
+  </div>
+    <footer class="fade d3">
+This is the development sandbox where you can preview the content we are working on<br>
+  &copy; 2025 Linala. All rights reserved.<br>
+  </footer>
+</body>
+
+<!-- JS STEP -->
+<script>
+  const steps = Array.from(document.querySelectorAll("details.step"));
+  const btn = document.getElementById("toggleButton");
+
+  // initial: only first step visible
+  if (steps.length > 0) {
+    steps[0].classList.add("visible");
+  }
+
+  // progressive unlock logic
+  steps.forEach((step, index) => {
+    step.addEventListener("toggle", () => {
+      if (step.open) {
+        if (steps[index + 1]) {
+          steps[index + 1].classList.add("visible");
+        }
+      } else {
+        for (let i = index + 1; i < steps.length; i++) {
+          steps[i].classList.remove("visible");
+          steps[i].open = false;
+        }
+        btn.textContent = "Show All";
+      }
+    });
+  });
+
+  function toggleAll() {
+    const allVisibleAndOpen = steps.every(
+      (s) => s.classList.contains("visible") && s.open
+    );
+
+    if (!allVisibleAndOpen) {
+      steps.forEach((s) => {
+        s.classList.add("visible");
+        s.open = true;
+      });
+      btn.textContent = "Hide All";
+    } else {
+      steps.forEach((s, i) => {
+        s.open = false;
+        if (i === 0) {
+          s.classList.add("visible");
+        } else {
+          s.classList.remove("visible");
+        }
+      });
+      btn.textContent = "Show All";
+    }
+  }
+</script>
+</html>
